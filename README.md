@@ -298,12 +298,16 @@ evidence/                       # 环境、测试、迁移的真实输出
 | `tests/test_service.py` | 四个创建入口、必填关联字段、状态机、回退原因、对接记录、结果规则、关闭规则、贡献人去重 |
 | `tests/test_enums.py` | Python 枚举 ↔ DDL `CHECK` 双向一致、中文标签完整、阶段顺序 |
 | `tests/test_acceptance.py` | 工单四条验收标准逐条对应 |
+| `evidence/remote-clone-verify.txt` | 公开仓库无凭据 clone 后复跑全量测试 |
 
 实测（`evidence/test-results.txt`）：
 
 ```
 149 passed
 ```
+
+公开仓库匿名复验（`evidence/remote-clone-verify.txt`）：无凭据 `git clone` 克隆 36 个文件后，
+在全新目录复跑全量测试同样得到 `149 passed`。
 
 迁移实测（`evidence/migration-check.txt`）：
 

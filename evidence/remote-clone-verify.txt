@@ -1,0 +1,22 @@
+# 公开仓库匿名复验
+
+- 仓库：https://github.com/PikachuGits/s3-match-031-opportunity-models
+- 方式：无凭据 `git clone https://github.com/PikachuGits/s3-match-031-opportunity-models`（不携带任何 token / SSH key）
+- 提交：`6226760`（main）
+- 克隆文件数：36（不含 .git）
+- 数据库：PostgreSQL 16.16 @ 127.0.0.1:5432 / clawhunt_2056_test
+- 结果：
+
+```
+149 passed in 10.20s
+```
+
+复验命令：
+
+```bash
+git clone https://github.com/PikachuGits/s3-match-031-opportunity-models
+cd s3-match-031-opportunity-models
+python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
+TEST_DATABASE_URL='postgresql+psycopg://USER:PASSWORD@127.0.0.1:5432/clawhunt_2056_test' \
+  ./scripts/test.sh
+```
