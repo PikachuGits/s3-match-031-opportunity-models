@@ -1,0 +1,50 @@
+erDiagram
+    opportunity ||--o{ opportunity_meeting : "1 商机 : N 对接记录"
+    opportunity ||--o{ opportunity_stage_log : "1 商机 : N 阶段留痕"
+
+    opportunity {
+        uuid id PK
+        uuid org_id
+        uuid site_id
+        uuid source_item_id "需求条目，可空"
+        uuid match_id "AI 匹配记录"
+        uuid connect_request_id "对接请求"
+        uuid party_a_company_id "需求方"
+        uuid party_b_company_id "供给方"
+        varchar origin "ai_match / member_initiated / staff_intro / event"
+        uuid event_id "活动"
+        uuid owner_staff_id "负责会员经理"
+        varchar stage "follow_up / meeting / outcome / closed"
+        timestamptz stage_entered_at
+        timestamptz first_contacted_at
+        timestamptz party_a_confirmed_at
+        timestamptz party_b_confirmed_at
+        varchar outcome "deal / no_deal / on_hold"
+        varchar lost_reason "未成交原因字典"
+        bigint deal_cents "成交金额（分）"
+        smallint feedback_a "1-5"
+        smallint feedback_b "1-5"
+        timestamptz closed_at
+        uuid_array contributors "贡献员工"
+        timestamptz deleted_at "软删除"
+    }
+
+    opportunity_meeting {
+        uuid id PK
+        uuid opportunity_id FK
+        varchar meeting_type "one_on_one / salon / closed_door"
+        timestamptz meeting_at
+        jsonb participants "参与方数组"
+        text summary "纪要摘要"
+        uuid event_id "关联活动"
+    }
+
+    opportunity_stage_log {
+        uuid id PK
+        uuid opportunity_id FK
+        varchar from_stage "首条为空"
+        varchar to_stage
+        uuid operator_staff_id
+        text reason
+        timestamptz occurred_at
+    }
